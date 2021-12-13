@@ -29,8 +29,11 @@ Another menu will seperate these two systems so that the user can choose between
 ## Skills presented in this project
 
 - code layout
+  - the two different systems will be separated to remove confusion
 - using libraries
+  - I will need to import libraries to get the UI working, as well as database connections, at a minimum.
 - Use of a GUI
+  - The JavaFX library will be used, along with the intelliJ scene builder
 - casting
 - selection
   - updating the database dependant on whether the user has pressed specific buttons
