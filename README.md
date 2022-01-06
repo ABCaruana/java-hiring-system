@@ -77,3 +77,11 @@ Mid Mar 2022 - Apr 2022
 ## Methodology
 
 For this project i will be using the waterfall methodology. To make sure i keep everything on track i will be using microsoft project to create a gantt chart
+
+## Planning - Images
+### Applicant submission page
+![applicant submission page](planning/screenshots/applicant-submit.png)
+### Applicant viewer (individual)
+![Applicant viewer (individual)](planning/screenshots/single-applicant-staff-view.png)
+### Applicant viewer (list)
+![Applicant viewer (list)](planning/screenshots/applicant-viewer.png)
