@@ -1,0 +1,21 @@
+/* CURRENTLY UNUSED */
+
+.myDialog{
+    -fx-background-color: #212121;
+}
+.myDialog > *.button-bar > *.container{
+    -fx-background-color: #212121;
+}
+.myDialog > *.label.content{
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FFFFFF;
+}
+.myDialog:header *.header-panel{
+    -fx-background-color: #212121;
+}
+.myDialog:header *.header-panel *.label{
+    -fx-font-size: 18px;
+    -fx-font-style: italic;
+    -fx-text-fill: #FFFFFF;
+}

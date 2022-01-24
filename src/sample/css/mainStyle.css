@@ -1,0 +1,35 @@
+/* COLOUR SCHEME */
+/* dark1 = #181818 */
+/* dark2 = #212121 */
+/* dark3 = #3D3D3D */
+/* light1 = #FFFFFF */
+/* light2 = #AAAAAA */
+
+.button:hover {
+    -fx-background-color: #212121;
+}
+
+.button {
+    -fx-background-color: #3d3d3d;
+    -fx-text-fill: white;
+}
+
+.input {
+    -fx-background-color: #3d3d3d;
+    -fx-text-fill: white;
+    -fx-text-alignment: LEFT;
+}
+
+.background {
+    -fx-background-color: #181818;
+    -fx-text-fill: white;
+    
+}
+
+.title {
+    -fx-text-fill: #c1c1c1; -fx-text-fill: white;
+    -fx-font-size: 36px;
+    -fx-font-family: "Bahnschrift";
+    -fx-base: rgb(132, 145, 47);
+    -fx-background: rgb(225, 228, 203);
+}
