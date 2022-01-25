@@ -1,18 +1,63 @@
+package sample;
+
 import org.ini4j.Ini;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.HashMap;
 
 public class Database {
-    public static void main(String[] args) {
-        connectToDatabase();
+    private static Connection conn;
+
+    public static void main(String[] args) throws SQLException {
+        conn = connectToDatabase();
+//        addApplicantToDB("adam", "caruana", "UK", "test", "new", LocalDate.parse("2004-03-01"));
+//        updateStatus(3, "accepted");
+        System.out.println(getApplicantByID(3).getYearsOld());
     }
 
+    public static void updateStatus(int applicantID, String status) throws Exception {
+        String[] acceptableStatuses = new String[] {"accepted", "declined", "new"};
+        for (String acceptableStatus : acceptableStatuses) {
+            if (acceptableStatus.equalsIgnoreCase(status)) {
+                String updateQuery = String.format("update applicants set application_status='%s' where applicantID=%s", status.toLowerCase(), applicantID);
+                Statement stmt = conn.createStatement();
+                stmt.executeUpdate(updateQuery);
+                return;
+            }
+        }
+        throw new Exception("entered status is not valid.");
+    }
+    public static Applicant getApplicantByID(int applicantID) throws SQLException {
+        Statement getApplicantQuery = conn.createStatement();
+        ResultSet queryOutput = getApplicantQuery.executeQuery("SELECT * FROM applicants WHERE applicantID = " + applicantID);
+
+        queryOutput.next();
+
+        String forename = queryOutput.getString("forename");
+        String surname = queryOutput.getString("surname");
+        String country = queryOutput.getString("country");
+        String about = queryOutput.getString("about");
+        String status = queryOutput.getString("application_status");
+
+        // parse our date of birth to a LocalDate
+        String dateOfBirth = queryOutput.getString("date_of_birth");
+        LocalDate parsedDOB = LocalDate.parse(dateOfBirth);
+
+        return new Applicant(applicantID, forename, surname, country, about, status, parsedDOB);
+    }
+    public static void addApplicantToDB(String forename, String surname, String country,
+                                 String about, String status, LocalDate dateOfBirth) throws SQLException {
+        Statement stmt = conn.createStatement();
+        String insertStmt = String.format("INSERT INTO `applicants` VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s')",
+                forename, surname, dateOfBirth, country, about, "new");
+        System.out.println(insertStmt);
+        stmt.executeUpdate(insertStmt);
+    }
     public static Connection connectToDatabase(){
         Connection conn = null;
 
@@ -33,18 +78,7 @@ public class Database {
         catch (SQLException | IOException e) {
             throw new Error("Problem connecting to the database: ", e);
         }
-        finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            }
-            catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
     }
-
     public static HashMap<String, String> getConnectionDetails() throws IOException {
         try {
             Ini ini = new Ini(new FileReader("config.ini"));
@@ -67,25 +101,7 @@ public class Database {
             return null;
         }
     }
-
     public static void initialiseDB(Connection conn){
-        // create a database if it doesnt exist
-//        create database if not exists hiring_system;
-//
-//        EXAMPLE OF
-//        CREATE TABLE `hiring_system`.applicants(
-//                applicantID INT AUTO_INCREMENT PRIMARY KEY,
-//                forename VARCHAR(50),
-//                surname VARCHAR(50),
-//                date_of_birth DATE,
-//                country VARCHAR(50),
-//                about TEXT,
-//                application_status VARCHAR(20)
-//        );
-//
-//        insert into `hiring_system`.applicants values(null, 'John', 'Smith', '2004-03-01', 'United Kingdom', 'seriously cool', 'ACCEPTED');
-//
-//        insert into `hiring_system`.applicants values(null, 'Ann', 'Smith', '2004-03-01', 'United States', 'seriously uncool', 'DECLINED')
         try {
             Statement statement = conn.createStatement();
             int myResult = statement.executeUpdate("CREATE DATABASE IF NOT EXISTS hiring_system");
@@ -95,11 +111,11 @@ public class Database {
 
             String createTable = "CREATE TABLE IF NOT EXISTS applicants"
                 + "(applicantID INT AUTO_INCREMENT PRIMARY KEY,"
-                + "forename VARCHAR(50),"
-                + "surname VARCHAR(50),"
-                + "date_of_birth DATE,"
-                + "country VARCHAR(50),"
-                + "about TEXT,"
+                + "forename VARCHAR(50) NOT NULL,"
+                + "surname VARCHAR(50) NOT NULL,"
+                + "date_of_birth DATE NOT NULL,"
+                + "country VARCHAR(50) NOT NULL,"
+                + "about TEXT NOT NULL,"
                 + "application_status VARCHAR(20))";
 
             Statement stmt = conn.createStatement();
