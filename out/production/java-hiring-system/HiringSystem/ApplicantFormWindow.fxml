@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="577.0" prefWidth="758.0" styleClass="background" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HiringSystem.ApplicantFormController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="312.0" minHeight="-Infinity" prefHeight="283.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="260.0" minHeight="10.0" prefHeight="212.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="62.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <VBox fx:id="countryAndDOBVBox" prefHeight="290.0" prefWidth="270.0" spacing="10.0" GridPane.columnIndex="2">
+         <children>
+            <Label fx:id="DOBLabel" styleClass="inputheading" text="Date of birth" />
+            <HBox fx:id="DOBHBox" prefWidth="200.0">
+               <children>
+                  <ComboBox fx:id="dayDOB" prefHeight="25.0" prefWidth="60.0" promptText="DD" styleClass="combo-box">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin></ComboBox>
+                  <ComboBox fx:id="monthDOB" prefHeight="25.0" prefWidth="67.0" promptText="MM" styleClass="combo-box">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin></ComboBox>
+                  <ComboBox fx:id="yearDOB" prefHeight="25.0" prefWidth="86.0" promptText="YYYY" styleClass="combo-box">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></ComboBox>
+               </children>
+            </HBox>
+            <Label fx:id="countryLabel" styleClass="inputheading" text="Country of residence" />
+            <ComboBox fx:id="countryDropdown" prefWidth="150.0" styleClass="combo-box" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding></VBox>
+      <VBox fx:id="nameGenderVBox" prefHeight="179.0" prefWidth="214.0" spacing="10.0" GridPane.columnIndex="1">
+         <children>
+            <Label fx:id="forenameLabel" styleClass="inputheading" text="Forename" />
+            <TextField fx:id="forenameBox" prefHeight="25.0" prefWidth="181.0" styleClass="input">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </TextField>
+            <Label fx:id="surnameLabel" layoutX="10.0" layoutY="10.0" styleClass="inputheading" text="Surname" />
+            <TextField fx:id="surnameBox" styleClass="input" />
+            <Label fx:id="genderLabel" layoutX="10.0" layoutY="27.0" styleClass="inputheading" text="Gender" />
+            <RadioButton fx:id="maleRadio" mnemonicParsing="false" selected="true" text="Male">
+               <toggleGroup>
+                  <ToggleGroup fx:id="genderToggleGroup" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="femaleRadio" layoutX="15.0" layoutY="166.0" mnemonicParsing="false" text="Female" toggleGroup="$genderToggleGroup" />
+            <RadioButton fx:id="otherRadio" layoutX="15.0" layoutY="193.0" mnemonicParsing="false" text="Other" toggleGroup="$genderToggleGroup" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+      <VBox fx:id="aboutVBox" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
+         <children>
+            <Label fx:id="aboutLabel" styleClass="inputheading" text="Please write a bit about yourself (max. 1500 words)" />
+            <TextArea fx:id="aboutTextarea" prefHeight="200.0" prefWidth="200.0" promptText="Type here..." styleClass="input" wrapText="true" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+      <VBox fx:id="imageVBox" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+         <children>
+            <Label fx:id="imageLabel" styleClass="inputheading" text="Image preview" />
+            <ImageView fx:id="imageBox" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../pictures/placeholder.png" />
+               </image></ImageView>
+            <Button fx:id="imageUploadButton" mnemonicParsing="false" onAction="#uploadImage" text="Upload image" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+      <HBox fx:id="submitCancelHBox" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <children>
+            <Button fx:id="submitButton" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#submitForm" prefHeight="30.0" prefWidth="100.0" text="Submit" />
+            <Button fx:id="cancelButton" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#cancelForm" prefHeight="30.0" prefWidth="100.0" text="Cancel" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</GridPane>
