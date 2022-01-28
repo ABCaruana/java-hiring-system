@@ -1,32 +1,26 @@
-package sample;
+package HiringSystem;
 
-import com.mysql.cj.util.StringUtils;
-
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.Clock;
-import java.time.Duration;
 import java.time.LocalDate;
-import java.util.Date;
-import java.time.temporal.ChronoUnit;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Applicant {
-    private int applicantID;
-    private String forename;
-    private String surname;
-    private String country;
-    private String about;
+    private final int applicantID;
+    private final String forename;
+    private final String surname;
+    private final String gender;
+    private final String country;
+    private final String about;
     private String status;
-    private LocalDate dateOfBirth;
+    private final LocalDate dateOfBirth;
 
-    public Applicant(int applicantID, String forename, String surname, String country,
+    public Applicant(int applicantID, String forename, String surname, String gender, String country,
                      String about, String status, LocalDate dateOfBirth){
         this.applicantID = applicantID;
         this.forename = forename;
         this.surname = surname;
+        this.gender = gender;
         this.country = country;
         this.about = about;
         this.status = status;
@@ -72,6 +66,9 @@ public class Applicant {
     }
     public String getStatus(){
         return status;
+    }
+    public String getGender(){
+        return gender;
     }
     public LocalDate getDOB(){
         return dateOfBirth;
