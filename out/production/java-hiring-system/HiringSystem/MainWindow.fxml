@@ -5,13 +5,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="249.0" prefWidth="405.0" spacing="10.0" styleClass="background" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.mainWindowController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="249.0" prefWidth="405.0" spacing="10.0" styleClass="background" stylesheets="@css/mainStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HiringSystem.mainWindowController">
    <children>
       <Label styleClass="title" text="Job Portal">
          <font>
             <Font name="Century" size="42.0" />
          </font></Label>
-      <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="306.0" text="Applicant Login" />
+      <Button mnemonicParsing="false" onAction="#applicantForm" prefHeight="49.0" prefWidth="306.0" text="Applicant Form" />
       <Button fx:id="staffLoginButton" layoutX="157.0" layoutY="232.0" mnemonicParsing="false" onAction="#staffLogin" prefHeight="49.0" prefWidth="306.0" text="Staff Login">
          <VBox.margin>
             <Insets bottom="5.0" />

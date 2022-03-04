@@ -1,13 +1,15 @@
-package sample;
+package HiringSystem;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.DialogPane;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.ini4j.Ini;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -16,6 +18,12 @@ public class loginWindowController {
     TextField staffUsernameInput;
     @FXML
     PasswordField staffPasswordInput;
+
+    private void closeForm(){
+        // get a handle to the stage
+        Stage stage = (Stage) staffPasswordInput.getScene().getWindow();
+        stage.close();
+    }
 
     @FXML
     private boolean checkCredentials() throws IOException {
@@ -31,18 +39,23 @@ public class loginWindowController {
         System.out.println("comparing user input (" + inputtedPassword + ") to actual credential (" + actualPassword + ")");
 
         if (inputtedUsername.equals(actualUsername) && inputtedPassword.equals(actualPassword)){
-            return true;
+            // correct password
+            Parent root = FXMLLoader.load(getClass().getResource("ApplicantViewer.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Applicant viewer");
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
+            closeForm();
         }
         else {
+            // incorrect password
             Alert a = new Alert(Alert.AlertType.ERROR,"Username or password is invalid.");
             a.setTitle("Error - invalid password");
-//            DialogPane dialogPane = a.getDialogPane();
-//            dialogPane.getStylesheets().add(
-//                    getClass().getResource("css/customDialogs.css").toExternalForm());
-//            dialogPane.getStyleClass().add("customDialog");
             a.showAndWait();
             return false;
         }
+        return false;
     }
 
 }

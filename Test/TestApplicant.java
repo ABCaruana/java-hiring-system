@@ -1,15 +1,13 @@
 import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.cglib.core.Local;
-import sample.Applicant;
+import HiringSystem.Applicant;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class TestApplicant {
 
     private final Applicant testApplicant = new Applicant(1, "Adam", "Caruana",
-            "UK", "test", "new", LocalDate.parse("2004-03-01"));
+            "Male", "UK", "test", "new", LocalDate.parse("2004-03-01"));
 
     @Test
     public void testGetYearsOld(){
@@ -48,7 +46,7 @@ public class TestApplicant {
     public void testUpdateStatusInvalid() throws Exception {
         // first make sure we have a new applicant
         Applicant applicantToUpdate = new Applicant(1, "Adam", "Caruana",
-                "UK", "test", "new", LocalDate.parse("2004-03-01"));
+                "Male", "UK", "test", "new", LocalDate.parse("2004-03-01"));
         Assert.assertEquals(applicantToUpdate.getStatus(), "new");
 
         // run an update on the same applicant
@@ -69,7 +67,7 @@ public class TestApplicant {
     @Test
     public void testUpdateStatusValid() throws Exception {
         // first make sure we have a new applicant
-        Applicant applicantToUpdate = new Applicant(1, "Adam", "Caruana",
+        Applicant applicantToUpdate = new Applicant(1, "Adam", "Caruana", "Male",
                 "UK", "test", "new", LocalDate.parse("2004-03-01"));
         Assert.assertEquals(applicantToUpdate.getStatus(), "new");
 

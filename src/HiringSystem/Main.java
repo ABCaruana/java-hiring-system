@@ -1,4 +1,4 @@
-package sample;
+package HiringSystem;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
