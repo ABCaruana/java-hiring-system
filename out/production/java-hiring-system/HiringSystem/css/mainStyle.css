@@ -41,6 +41,10 @@
     -fx-text-fill: white;
 }
 
+.text-area{
+    -fx-text-fill: white;
+}
+
 .text-area .content{
     -fx-background-color: #3d3d3d;
 }
