@@ -19,6 +19,12 @@ public class loginWindowController {
     @FXML
     PasswordField staffPasswordInput;
 
+    private void closeForm(){
+        // get a handle to the stage
+        Stage stage = (Stage) staffPasswordInput.getScene().getWindow();
+        stage.close();
+    }
+
     @FXML
     private boolean checkCredentials() throws IOException {
         String inputtedUsername = staffUsernameInput.getText();
@@ -40,6 +46,7 @@ public class loginWindowController {
             stage.setScene(new Scene(root));
             stage.setResizable(false);
             stage.show();
+            closeForm();
         }
         else {
             // incorrect password

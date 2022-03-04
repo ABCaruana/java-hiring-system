@@ -45,6 +45,7 @@ public class Database {
 
         return new Applicant(applicantID, forename, surname, gender, country, about, status, parsedDOB);
     }
+
     public static String addApplicantToDB(String forename, String surname, String country,
                                  String about, String status, LocalDate dateOfBirth, String gender) throws SQLException {
         Statement stmt = conn.createStatement();
@@ -60,6 +61,7 @@ public class Database {
 
         return queryOutput.getString(1);
     }
+
     public static Connection connectToDatabase(){
         Connection conn = null;
 
@@ -82,6 +84,7 @@ public class Database {
         }
 
     }
+
     public static HashMap<String, String> getConnectionDetails() throws IOException {
         try {
             Ini ini = new Ini(new FileReader("config.ini"));
@@ -104,6 +107,7 @@ public class Database {
             return null;
         }
     }
+
     public static void initialiseDB(Connection conn){
         try {
             Statement stmt = conn.createStatement();
@@ -130,13 +134,13 @@ public class Database {
             System.out.println("unable to initialise database: " + e);
         }
     }
+
     public static ArrayList<Applicant> getAllApplicants() throws SQLException {
         Statement getApplicantQuery = conn.createStatement();
         ResultSet queryOutput = getApplicantQuery.executeQuery("SELECT applicantID FROM applicants");
         ArrayList<Applicant> applicantList = new ArrayList<>();
 
         while (queryOutput.next()){
-            System.out.println(queryOutput.getInt(1));
             applicantList.add(getApplicantByID(queryOutput.getInt(1)));
         }
 

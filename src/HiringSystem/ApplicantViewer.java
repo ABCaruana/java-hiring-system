@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -40,7 +41,8 @@ public class ApplicantViewer {
         Label genderLabel = new Label(String.format("Gender: %s", applicant.getGender()));
         Label dobLabel = new Label(String.format("date of birth: %s (%s)", applicant.getDOB(), applicant.getYearsOld()));
         Label countryLabel = new Label(String.format("Country: %s", applicant.getCountry()));
-        detailBox.getChildren().addAll(namelabel, genderLabel, dobLabel, countryLabel);
+        Label statusLabel = new Label(String.format("Status: %s", applicant.getStatus()));
+        detailBox.getChildren().addAll(namelabel, genderLabel, dobLabel, countryLabel, statusLabel);
     }
 
     public void addButton(Applicant applicant, int row, int col){
@@ -51,7 +53,11 @@ public class ApplicantViewer {
         // open a window with more detailed information about a given applicant
         viewApplicantButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                System.out.println(applicant.getApplicantID());
+                try {
+                    SingleApplicantViewer.showApplicant(applicant);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
             }
         });
 
@@ -63,7 +69,6 @@ public class ApplicantViewer {
         int applicantID = applicant.getApplicantID();
 
         // add a new row to the gridpane with applicants' details
-        System.out.println("adding row " + applicantGrid.getRowCount());
         RowConstraints row = new RowConstraints(120);
         applicantGrid.getRowConstraints().add(row);
 
@@ -88,7 +93,6 @@ public class ApplicantViewer {
 
         // start adding our rows
         for (Applicant applicant : fullQuery){
-            System.out.println(applicant.getForename());
             addRow(applicant);
         }
     }

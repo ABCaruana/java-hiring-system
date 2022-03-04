@@ -50,10 +50,9 @@ public class ApplicantFormController {
     ImageView imageBox;
 
     @FXML
-    private void cancelForm(){
+    private void closeForm(){
         // get a handle to the stage
         Stage stage = (Stage) cancelButton.getScene().getWindow();
-        // do what you have to do
         stage.close();
     }
 
@@ -95,10 +94,15 @@ public class ApplicantFormController {
 
             Image profilePicture = imageBox.getImage();
             ImageIO.write(SwingFXUtils.fromFXImage(profilePicture, null), "png", new File("pictures/"+result+".png"));
-
+            Alert a = new Alert(Alert.AlertType.INFORMATION, "Thank you for submitting your information, " + forenameBoxText);
+            a.setTitle("Complete");
+            a.showAndWait();
+            closeForm();
         }
-        catch (SQLException | IOException ex){
-            ex.printStackTrace();
+        catch (Exception ex){
+            Alert a = new Alert(Alert.AlertType.INFORMATION, "Please upload an image");
+            a.setTitle("Error uploading profile picture");
+            a.showAndWait();
         }
     }
 

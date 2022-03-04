@@ -1,5 +1,7 @@
 package HiringSystem;
 
+import javafx.scene.image.Image;
+
 import java.time.Clock;
 import java.time.LocalDate;
 
@@ -44,6 +46,11 @@ public class Applicant {
             e.printStackTrace();
             throw e;
         }
+    }
+
+    public Image getApplicantImage(){
+        String imagePath = "pictures/" + getApplicantID() + ".png";
+        return new Image("file:" + imagePath);
     }
 
     public int getApplicantID(){
